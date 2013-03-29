@@ -1,11 +1,14 @@
 {
-    "provider": "digital_ocean",
-    "api_info": {
-		"api_key": "asd",
-		"client_key": "asd"
+    "provider_info": {
+    	"provider_id": "digital_ocean",
+	    "api_info": {
+				"api_key": "asd",
+				"client_key": "asd"
+			},
+			"vm_image_id":"333",
+			"region_id": "1"
 		},
     "name": "dyson",
-   
     "user": "hortinstein",
     "application_servers": [
       "90.2.2.21",
@@ -15,49 +18,18 @@
     "init_cookie":"justatestcookie",
     "username":"hortinstein",
     "passcookie":"justatestpasscookie",
-    "vm_image_id": "333",
-    "init": "true",
+    "init": "false",
     "schematic":{
         "trove_size": "66",
         "curator_size": "66",
         "troves": "5",
-        "curator_info":[
-            ],
-        "troves_info":[
-            ]
+        "curator_ip":"90.2.2.21",
+        "trove_ips": [
+        	"90.2.2.21",
+			    "90.2.2.22",
+			    "90.2.2.23",
+			    "90.2.2.24",
+			    "90.2.2.25"
+        ]
     }
-}
-
-
-
-
-{
-	"provider": "digital_ocean",
-	"api_info": {
-		"api_key": "asd",
-		"client_key": "asd"
-		},
-  "name": "dyson",
-  "nodes": "5",
-  "user": "hortinstein",
- 	"curator_ip": "10.2.2.2",
- 	"application_servers": [
-		"90.2.2.21",
-    "90.2.2.22"
- 	],
-  "nanodes": [
-    "90.2.2.21",
-    "90.2.2.22",
-    "90.2.2.23",
-    "90.2.2.24",
-    "90.2.2.25"
-  ],
-  "ports": {
-    "IP": "0.0.3",
-    "control": "~0.2.3"
-  },
-  "storage_backend": "riak_kv_eleveldb_backend",
-  "init_cookie":"justatestcookie",
-  "username":"hortinstein",
-  "passcookie":"justatestpasscookie"
 }
