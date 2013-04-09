@@ -1,11 +1,12 @@
 {
     "provider_info": {
     	"provider_id": "digital_ocean",
+      "region_id": "1",
 	    "api_info": {
 				"api_key": "asd",
 				"client_key": "asd"
 			},
-			"vm_image_id":"333",
+			"vm_image_id":"333"
 		},
     "name": "dyson",
     "user": "hortinstein",
@@ -21,6 +22,6 @@
     "schematic":{
         "trove_size": "66",
         "curator_size": "66",
-        "troves": "5",
+        "troves": "5"
     }
 }

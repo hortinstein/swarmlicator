@@ -26,6 +26,8 @@
     "control": "~0.2.3",
     "restify": "~2.3.1",
     "request": "~2.14.0",
-    "prompt": "~0.2.9"
+    "prompt": "~0.2.9",
+    "underscore": "*",
+    "should": "*"
   }
 }

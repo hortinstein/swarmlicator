@@ -1,21 +1,30 @@
+
+
+
+// ***need to declare this dynamically later 
+// var size_def = function(size) {
+//   [ { id: 66, name: '512MB' },
+//      { id: 63, name: '1GB' },
+//      { id: 62, name: '2GB' },
+//      { id: 64, name: '4GB' },
+//      { id: 65, name: '8GB' },
+//      { id: 61, name: '16GB' },
+//      { id: 60, name: '32GB' },
+//      { id: 70, name: '48GB' },
+//      { id: 69, name: '64GB' },
+//      { id: 68, name: '96GB' } ]
+// }
+
 var digital_ocean = require('brinydeep');
 
 var api = {};
 
-api.swarm_init = function(input_json, callback) {
-    try {
-        var api_key = input_json.provider_info.api_info.api_key;
-        var client_key = input_json.provider_info.api_info.client_key;
-        var vm_image = input_json.provider_info.vm_image_id;
-        var region_id = input_json.provider_info.region_id;
-        var curator_size = input_json.schematic.curator_size;
-        var trove_size = input_json.schematic.trove_size;
-    }
-    catch (err) {
-        callback(err, null);
-    }
+api.setup = function(provider_info) {
+  
+}
 
-
+api.swarmite_init = function(size, config, callback) {
+    
 };
 
 api.curator_scale = function(curator_id, size, callback) {
