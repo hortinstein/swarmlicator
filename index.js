@@ -1,13 +1,13 @@
 //modular for future expansion to other APIs
 var api = "";
 
-var _und = require("underscore") //
+var _und = require("underscore"); //
 var config_json = ""; 
 
 
 var swarmlicator = {};
 
-swarmlicator.setup = function(config) {
+swarmlicator.setup = function(config,callback) {
    var req_attr = ["provider_info","name","user","application_servers","storage_backend","init_cookie","username","passcookie","schematic"];
    var config_attr = Object.keys(config);
    var absent_attr = _und.difference(req_attr, config_attr);//slightly hacky code that checks to ensure config has correct vars
@@ -15,10 +15,12 @@ swarmlicator.setup = function(config) {
      throw Error("missing following attributes from config:" + absent_attr); 
    } else {
       config_json = config;   
-      
-      api = require('./middleware/digital_ocean/digital_ocean.js');
+      switch(config_json.provider_info.provider_id){
+        case "digital_ocean": api = require('./middleware/digital_ocean/digital_ocean.js');
+        break;
+      }
+      api.setup(config_json.provider_info,callback);
    }
-   
 };
 
 

@@ -20,8 +20,8 @@
     "passcookie":"justatestpasscookie",
     "init": "true",
     "schematic":{
-        "trove_size": "66",
-        "curator_size": "66",
+        "trove_size": "1",
+        "curator_size": "1",
         "troves": "5"
     }
 }
