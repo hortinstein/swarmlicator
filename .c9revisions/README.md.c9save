@@ -1,1 +1,2 @@
 {"ts":1364257842018,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"tool for creating a swarm based on json blueprint created by swarmgineer"]],"start1":0,"start2":0,"length1":0,"length2":72}]],"length":72}
+{"contributors":[],"silentsave":false,"ts":1365676180202,"patch":[[{"diffs":[[0,"rmgineer"],[1,"\n\ntakes input from swarmgineer"]],"start1":64,"start2":64,"length1":8,"length2":38}]],"length":102,"saved":false}
