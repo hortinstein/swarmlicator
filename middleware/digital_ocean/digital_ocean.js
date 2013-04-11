@@ -1,5 +1,6 @@
 var brinydeep = require('brinydeep');
 var region_id = 0;
+var image_id= 0;
 var sizes = [];
 
 //retrieves the latest sizes
@@ -21,23 +22,39 @@ api.setup = function(provider_info,callback) {
   brinydeep.setup(provider_info.api_info.client_key,
                   provider_info.api_info.api_key);
   region_id = provider_info.region_id;
+  image_id = provider_info.image_id;
   size_def(callback);
 };
 
-api.swarmite_init = function(size, config, callback) {
+
+api.swarmite_init = function(size, name, callback) {
+  var swarmite_info = {};
+  swarmite_info.name = name;
+  swarmite_info.size = sizes[size];
+  swarmite_info.image_id = image_id;
+  swarmite_info.region_id = region_id;
+   
+  brinydeep.new_droplets(swarmite_info,function (e,o) {
     
+  });
 };
 
-api.curator_scale = function(curator_id, size, callback) {
-
+api.swarmite_scale = function(id, size, callback) {
+  brinydeep.resize(id,sizes[size],function (e,o) {
+    callback();
+  });
 };
 
-api.trove_scale = function(trove_ids, trove_size, trove_number, callback) {
-
+api.swarmite_destroy = function(id, callback) {
+  brinydeep.destroy(id,function (e,o) {
+    callback();
+  });
 };
 
 api.swarmite_reset = function(ids, callback) {
-
+  brinydeep.reboot(id,function (e,o) {
+    callback();
+  });
 };
 
 api.destroy_swarm = function(ids, callback) {

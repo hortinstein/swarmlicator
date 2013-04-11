@@ -27,15 +27,15 @@ swarmlicator.setup = function(config,callback) {
 //these bind the primary functions to their API.  This is not 100% nessecary, but done for visibility and in case of future expansion.
 //general error checking should be moved here eventually
 swarmlicator.curator_init = function(config,callback) {
-
+    
 };
 
 swarmlicator.curator_scale = function(curator_id, size, callback) {
-    api.curator_scale(curator_id,size, callback);
+  api.curator_scale(curator_id,size, callback);
 };
 
 swarmlicator.troves_init = function(config, callback) {
-    api.swarm_init(config,callback);
+  api.swarm_init(config,callback);
 };
 
 swarmlicator.trove_remove = function(trove_id,callback) {
@@ -46,15 +46,15 @@ swarmlicator.trove_add = function(config,image_id,size,callback) {
 };
 
 swarmlicator.trove_scale = function(trove_ids, trove_size, trove_number, callback) {
-    api.trove_size(trove_ids,trove_size,trove_number,callback);
+  api.trove_size(trove_ids,trove_size,trove_number,callback);
 };
 
 swarmlicator.swarmite_reset = function(ids, callback) {
-    api.swarmite_reset(ids,callback);
+  api.swarmite_reset(ids,callback);
 };
 
 swarmlicator.destroy_swarm = function(ids, callback) {
-    api.destroy_swarm(ids,callback);
+  api.destroy_swarm(ids,callback);
 };
 
 module.exports = swarmlicator;
