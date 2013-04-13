@@ -53,8 +53,9 @@ swarmlicator.swarmite_reset = function(ids, callback) {
   api.swarmite_reset(ids,callback);
 };
 
-swarmlicator.destroy_swarm = function(ids, callback) {
-  api.destroy_swarm(ids,callback);
-};
+// too dangerous right now
+// swarmlicator.destroy_swarm = function(ids, callback) {
+//   api.destroy_swarm(ids,callback);
+// };
 
 module.exports = swarmlicator;
