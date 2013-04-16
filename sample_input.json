@@ -5,6 +5,7 @@
 		"client_key": "asd"
 		},
     "name": "dyson",
+    "type": "curator",
     "trove_size": "66",
     "curator_size": "66",
     "troves": "5",

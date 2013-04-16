@@ -26,7 +26,6 @@ api.setup = function(provider_info,callback) {
   size_def(callback);
 };
 
-
 api.swarmite_init = function(size, name, config, callback) {
   var swarmite_info = {};
   swarmite_info.name = name;
