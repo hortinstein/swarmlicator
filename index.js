@@ -26,14 +26,14 @@ swarmlicator.setup = function(config,callback) {
 swarmlicator.swarmlicant_ping = function(address,callback) {
   var test_alive = function (address,callback) {
     var request = require("request");
-    request(address, function(e, r, o) {
-    	if(o= "\"pong\""){
+    request.get({uri:address,timeout:100}, function(e, r, o) {  
+      console.log(r);
+    	if(e === "\"pong\""){
     	    setTimeout(test_alive,2000,address,callback);
-        }
-        else{
-            console.log('found');
-            callback();
-        }
+      } else {
+          console.log('found');
+          callback();
+      }
 	});
   }
   var request = require("request");    
