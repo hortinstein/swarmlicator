@@ -33,10 +33,7 @@ api.swarmite_init = function(size, name, config, callback) {
   swarmite_info.image_id = image_id;
   swarmite_info.region_id = region_id;
    
-  brinydeep.new_droplets(swarmite_info,function (e,o) {
-    //need to ping until up than call callback
-    
-  });
+  brinydeep.new_droplets(swarmite_info,callback);
 };
 
 api.swarmite_scale = function(id, size, callback) {
@@ -51,7 +48,7 @@ api.swarmite_destroy = function(id, callback) {
   });
 };
 
-api.swarmite_reset = function(ids, callback) {
+api.swarmite_reset = function(id, callback) {
   brinydeep.reboot(id,function (e,o) {
     callback();
   });

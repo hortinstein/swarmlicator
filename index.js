@@ -27,17 +27,17 @@ swarmlicator.swarmlicant_ping = function(address,callback) {
   var test_alive = function (address,callback) {
     var request = require("request");
     request.get({uri:address,timeout:100}, function(e, r, o) {  
-      console.log(r);
-    	if(e === "\"pong\""){
+      console.log(o);
+    	if(o !== "\"pong\""){
+            console.log('server not alive yet');
     	    setTimeout(test_alive,2000,address,callback);
       } else {
-          console.log('found');
+          //console.log('found');
           callback();
       }
 	});
   }
-  var request = require("request");    
-  setTimeout(test_alive,2000,address,callback);
+  setTimeout(test_alive,1000,address,callback);
 };
 
 //these bind the primary functions to their API.  This is not 100% nessecary, but done for visibility and in case of future expansion.

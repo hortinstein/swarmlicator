@@ -24,7 +24,7 @@
   "dependencies": {
     "brinydeep": "*",
     "control": "~0.2.3",
-    "restify": "~2.3.1",
+    "restify": "~2.3.5",
     "request": "~2.14.0",
     "prompt": "~0.2.9",
     "underscore": "*",
