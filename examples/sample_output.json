@@ -20,16 +20,23 @@
     "passcookie":"justatestpasscookie",
     "init": "false",
     "schematic":{
-        "trove_size": "66",
-        "curator_size": "66",
-        "troves": "5",
-        "curator_ip":"90.2.2.21",
-        "trove_ips": [
-        	"90.2.2.21",
-			    "90.2.2.22",
-			    "90.2.2.23",
-			    "90.2.2.24",
-			    "90.2.2.25"
+        "curator":{
+          "id":100824,
+          "name":"test_curator",
+          "image_id":419,
+          "size_id":32
+          },
+        "troves": [
+          { "id":100824,
+            "name":"test_trove",
+            "image_id":419,
+            "size_id":32
+          },
+          { "id":100824,
+            "name":"test2_trove",
+            "image_id":419,
+            "size_id":32
+          },
         ]
     }
 }

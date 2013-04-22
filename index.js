@@ -27,12 +27,13 @@ swarmlicator.swarmlicant_ping = function(address,callback) {
   var test_alive = function (address,callback) {
     var request = require("request");
     request.get({uri:address,timeout:100}, function(e, r, o) {  
-      console.log(o);
+      //console.log(o);
     	if(o !== "\"pong\""){
-            console.log('server not alive yet');
-    	    setTimeout(test_alive,2000,address,callback);
+          console.log('server not alive yet');
+    	    setTimeout(test_alive,1000,address,callback);
       } else {
           //console.log('found');
+          //would be a good place to send a callback to configure the trove
           callback();
       }
 	});
@@ -51,13 +52,13 @@ swarmlicator.curator_scale = function(curator_id, size, callback) {
 };
 
 swarmlicator.troves_init = function(config, callback) {
-  //api.swarm_init(config,callback);
+  
 };
 
 swarmlicator.trove_remove = function(trove_id,callback) {
   
 };
-swarmlicator.trove_add = function(config,image_id,size,callback) {
+swarmlicator.trove_add = function(size,name,callback) {
   
 };
 

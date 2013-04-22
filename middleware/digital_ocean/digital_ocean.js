@@ -7,7 +7,7 @@ var sizes = [];
 var size_def = function(callback) {
   sizes = brinydeep.sizes(function(e,o){
     if (e){
-      console.log(e);
+      //console.log(e);
       throw Error(e);
     } else {
       sizes = o.sizes;
@@ -26,7 +26,7 @@ api.setup = function(provider_info,callback) {
   size_def(callback);
 };
 
-api.swarmite_init = function(size, name, config, callback) {
+api.swarmite_init = function(size, name, callback) {
   var swarmite_info = {};
   swarmite_info.name = name;
   swarmite_info.size = sizes[size];
