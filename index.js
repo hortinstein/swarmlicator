@@ -2,7 +2,7 @@
 var api = "";
 
 var _und = require("underscore"); //
-var config_json = ""; 
+var config_json = "";
 
 
 var swarmlicator = {};
@@ -12,9 +12,9 @@ swarmlicator.setup = function(config,callback) {
    var config_attr = Object.keys(config);
    var absent_attr = _und.difference(req_attr, config_attr);//slightly hacky code that checks to ensure config has correct vars
    if (absent_attr.length !== 0){
-     throw Error("missing following attributes from config:" + absent_attr); 
+     throw Error("missing following attributes from config:" + absent_attr);
    } else {
-      config_json = config;   
+      config_json = config;
       switch(config_json.provider_info.provider_id){
         case "digital_ocean": api = require('./middleware/digital_ocean/digital_ocean.js');
         break;
@@ -26,7 +26,7 @@ swarmlicator.setup = function(config,callback) {
 swarmlicator.swarmlicant_ping = function(address,callback) {
   var test_alive = function (address,callback) {
     var request = require("request");
-    request.get({uri:address,timeout:100}, function(e, r, o) {  
+    request.get({uri:address,timeout:100}, function(e, r, o) {
       //console.log(o);
     	if(o !== "\"pong\""){
           console.log('server not alive yet');
@@ -44,7 +44,7 @@ swarmlicator.swarmlicant_ping = function(address,callback) {
 //these bind the primary functions to their API.  This is not 100% nessecary, but done for visibility and in case of future expansion.
 //general error checking should be moved here eventually
 swarmlicator.curator_init = function(config,callback) {
-    
+
 };
 
 swarmlicator.curator_scale = function(curator_id, size, callback) {
@@ -52,14 +52,14 @@ swarmlicator.curator_scale = function(curator_id, size, callback) {
 };
 
 swarmlicator.troves_init = function(config, callback) {
-  
+
 };
 
 swarmlicator.trove_remove = function(trove_id,callback) {
-  
+
 };
 swarmlicator.trove_add = function(size,name,callback) {
-  
+
 };
 
 swarmlicator.trove_scale = function(trove_ids, trove_size, trove_number, callback) {
