@@ -26,7 +26,7 @@ swarmlicator.setup = function(config,callback) {
 swarmlicator.swarmlicant_ping = function(address,callback) {
   var test_alive = function (address,callback) {
     var request = require("request");
-    request.get({uri:address,timeout:100}, function(e, r, o) {
+    request.get({uri:address,timeout:1000}, function(e, r, o) {
       //console.log(o);
     	if(o !== "\"pong\""){
           console.log('server not alive yet');
