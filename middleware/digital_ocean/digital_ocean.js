@@ -26,7 +26,7 @@ api.setup = function(provider_info,callback) {
   size_def(callback);
 };
 
-api.swarmite_init = function(size, name, callback) {
+api.swarmlicant_init = function(size, name, callback) {
   var swarmite_info = {};
   swarmite_info.name = name;
   swarmite_info.size = sizes[size];
@@ -36,19 +36,19 @@ api.swarmite_init = function(size, name, callback) {
   brinydeep.new_droplets(swarmite_info,callback);
 };
 
-api.swarmite_scale = function(id, size, callback) {
+api.swarmlicant_scale = function(id, size, callback) {
   brinydeep.resize(id,sizes[size],function (e,o) {
     callback();
   });
 };
 
-api.swarmite_destroy = function(id, callback) {
+api.swarmlicant_destroy = function(id, callback) {
   brinydeep.destroy(id,function (e,o) {
     callback();
   });
 };
 
-api.swarmite_reset = function(id, callback) {
+api.swarmlicant_reset = function(id, callback) {
   brinydeep.reboot(id,function (e,o) {
     callback();
   });

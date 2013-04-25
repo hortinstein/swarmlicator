@@ -66,8 +66,8 @@ swarmlicator.trove_scale = function(trove_ids, trove_size, trove_number, callbac
   api.trove_size(trove_ids,trove_size,trove_number,callback);
 };
 
-swarmlicator.swarmite_reset = function(ids, callback) {
-  api.swarmite_reset(ids,callback);
+swarmlicator.swarmlicant_reset = function(ids, callback) {
+  api.swarmlicant_reset(ids,callback);
 };
 
 // too dangerous right now
