@@ -89,6 +89,7 @@ swarmlicator.troves_init = function(number, size, name, callback) {
     });
   }, function (e,swarm) {
   	console.log(swarm);
+  	//should return the array of troves ips/ids
   }
 
 }
