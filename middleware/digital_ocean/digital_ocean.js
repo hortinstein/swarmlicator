@@ -3,27 +3,29 @@ var region_id = 0;
 var image_id= 0;
 var sizes = [];
 
+
+var api = {};
+var sizes = [];
 //retrieves the latest sizes
-var size_def = function(callback) {
+api.size_def = function(callback) {
   sizes = brinydeep.sizes(function(e,o){
     if (e){
       //console.log(e);
       throw Error(e);
     } else {
       sizes = o.sizes;
+      api.sizes = sizes; // exposing only for testing
       callback();
     }
   });
 }
-
-var api = {};
 
 api.setup = function(provider_info,callback) {
   brinydeep.setup(provider_info.api_info.client_key,
                   provider_info.api_info.api_key);
   region_id = provider_info.region_id;
   image_id = provider_info.image_id;
-  size_def(callback);
+  api.size_def(callback);
 };
 
 api.swarmlicant_init = function(size, name, callback) {

@@ -28,6 +28,7 @@
     "request": "~2.14.0",
     "prompt": "~0.2.9",
     "underscore": "*",
-    "should": "*"
+    "should": "*",
+    "async": "~0.2.8"
   }
 }
