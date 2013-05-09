@@ -65,7 +65,7 @@ swarmlicator.swarm_destory = function(ids, callback) {
 //general error checking should be moved here eventually
 swarmlicator.curator_init = function(config, callback) {
 	var req_attr = ["type", "name", "user", "application_servers", "init", "port",
-	"storage_backend", "init_cookie", "username", "passcookie", "troves"]
+		"storage_backend", "init_cookie", "username", "passcookie", "troves"]
 	check_req_attr(config, req_attr); //sync fucntion that will throw an erro
 
 
@@ -75,7 +75,7 @@ swarmlicator.curator_scale = function(curator_id, size, callback) {
 	api.curator_scale(curator_id, size, callback);
 };
 
-swarmlicator.troves_init = function(number, size, name, callback) {
+swarmlicator.troves_add = function(size, name, callback) {
 	var async = require('async');
 	async.times(number, function(n, next) {
 		api.swarmlicant_init(size, name + n, function(err, droplet) {
@@ -87,26 +87,21 @@ swarmlicator.troves_init = function(number, size, name, callback) {
 	});
 };
 
+swarmlicator.troves_remove = function(trove_ids, callback) {
 
-	swarmlicator.trove_add = function(size, name, callback) {
+};
 
-	};
+swarmlicator.swarmlicant_scale = function(trove_ids, swarmlicant_size, callback) {
+	api.swarmlicant_scale(trove_ids, trove_size, trove_number, callback);
+};
 
-	swarmlicator.trove_remove = function(trove_id, callback) {
+swarmlicator.swarmlicant_reset = function(ids, callback) {
+	api.swarmlicant_reset(ids, callback);
+};
 
-	};
+// too dangerous right now
+// swarmlicator.destroy_swarm = function(ids, callback) {
+//   api.destroy_swarm(ids,callback);
+// };
 
-	swarmlicator.swarmlicant_scale = function(trove_ids, swarmlicant_size, callback) {
-		api.swarmlicant_scale(trove_ids, trove_size, trove_number, callback);
-	};
-
-	swarmlicator.swarmlicant_reset = function(ids, callback) {
-		api.swarmlicant_reset(ids, callback);
-	};
-
-	// too dangerous right now
-	// swarmlicator.destroy_swarm = function(ids, callback) {
-	//   api.destroy_swarm(ids,callback);
-	// };
-
-	module.exports = swarmlicator;
+module.exports = swarmlicator;
