@@ -6,13 +6,13 @@ var config_json = "";
 
 var _und = require("underscore");
 //this function takes a list of required attributes and ensures they are present
-var check_req_attr = function(config, req_attr, callback) {
+var check_req_attr = function(config, req_attr) {
 	var config_attr = Object.keys(config);
 	var absent_attr = _und.difference(req_attr, config_attr); //slightly hacky code that checks to ensure config has correct vars
 	if (absent_attr.length !== 0) {
 		throw Error("missing following attributes from config:" + absent_attr);
 	} else {
-		callback();
+		return
 	};
 };
 
@@ -72,9 +72,8 @@ swarmlicator.swarm_destory = function(ids, callback) {
 swarmlicator.curator_init = function(config, callback) {
 	var req_attr = ["type", "name", "user", "application_servers","init","port"
 		"storage_backend", "init_cookie", "username", "passcookie", "troves"]
-	check_req_attr(config,req_attr,function () {
-	});
-
+	check_req_attr(config,req_attr);
+	
 };
 
 swarmlicator.curator_scale = function(curator_id, size, callback) {
