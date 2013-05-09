@@ -21,15 +21,14 @@ var swarmlicator = {};
 swarmlicator.setup = function(config, callback) {
 	var req_attr = ["provider_info", "name", "user", "application_servers",
 		"storage_backend", "init_cookie", "username", "passcookie", "schematic"]
-	check_req_attr(config,req_attr,function () {
-		config_json = config;
-		switch (config_json.provider_info.provider_id) {
-			case "digital_ocean":
-				api = require('./middleware/digital_ocean/digital_ocean.js');
-				break;
+	check_req_attr(config,req_attr);
+	config_json = config;
+	switch (config_json.provider_info.provider_id) {
+		case "digital_ocean":
+			api = require('./middleware/digital_ocean/digital_ocean.js');
+			break;
 		};
-		api.setup(config_json.provider_info, callback);
-	});
+	api.setup(config_json.provider_info, callback);
 };
 
 swarmlicator.swarmlicant_ping = function(address, callback) {
@@ -72,8 +71,9 @@ swarmlicator.swarm_destory = function(ids, callback) {
 swarmlicator.curator_init = function(config, callback) {
 	var req_attr = ["type", "name", "user", "application_servers","init","port"
 		"storage_backend", "init_cookie", "username", "passcookie", "troves"]
-	check_req_attr(config,req_attr);
-	
+	check_req_attr(config,req_attr); //sync fucntion that will throw an erro
+
+
 };
 
 swarmlicator.curator_scale = function(curator_id, size, callback) {
