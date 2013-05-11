@@ -66,7 +66,7 @@ swarmlicator.swarm_destory = function(ids, callback) {
 swarmlicator.curator_init = function(config, callback) {
 	var req_attr = ["type", "name", "user", "application_servers", "init", "port",
 		"storage_backend", "init_cookie", "username", "passcookie", "troves"]
-	check_req_attr(config, req_attr); //sync fucntion that will throw an erro
+	check_req_attr(config, req_attr); //sync fucntion that will throw an error if missing attr
 
 
 };
@@ -75,7 +75,7 @@ swarmlicator.curator_scale = function(curator_id, size, callback) {
 	api.curator_scale(curator_id, size, callback);
 };
 
-swarmlicator.troves_add = function(size, name, callback) {
+swarmlicator.troves_add = function(number, size, name, callback) {
 	var async = require('async');
 	async.times(number, function(n, next) {
 		api.swarmlicant_init(size, name + n, function(err, droplet) {
