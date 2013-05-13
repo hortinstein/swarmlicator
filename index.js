@@ -71,10 +71,6 @@ swarmlicator.curator_init = function(config, callback) {
 
 };
 
-swarmlicator.curator_scale = function(curator_id, size, callback) {
-	api.curator_scale(curator_id, size, callback);
-};
-
 swarmlicator.troves_add = function(number, size, name, callback) {
 	var async = require('async');
 	async.times(number, function(n, next) {
@@ -89,7 +85,7 @@ swarmlicator.troves_add = function(number, size, name, callback) {
 };
 
 swarmlicator.troves_remove = function(trove_ids, callback) {
-
+    //need to inform the curator when a trove is being destroyed, than await for acknoledgement before proceeding.  
 };
 
 swarmlicator.swarmlicant_scale = function(trove_ids, swarmlicant_size, callback) {
@@ -99,10 +95,5 @@ swarmlicator.swarmlicant_scale = function(trove_ids, swarmlicant_size, callback)
 swarmlicator.swarmlicant_reset = function(ids, callback) {
 	api.swarmlicant_reset(ids, callback);
 };
-
-// too dangerous right now
-// swarmlicator.destroy_swarm = function(ids, callback) {
-//   api.destroy_swarm(ids,callback);
-// };
 
 module.exports = swarmlicator;
