@@ -12,7 +12,7 @@ var check_req_attr = function(config, req_attr) {
 	if (absent_attr.length !== 0) {
 		throw Error("missing following attributes from config:" + absent_attr);
 	} else {
-		return
+	
 	};
 };
 
@@ -78,6 +78,7 @@ swarmlicator.curator_scale = function(curator_id, size, callback) {
 swarmlicator.troves_add = function(number, size, name, callback) {
 	var async = require('async');
 	async.times(number, function(n, next) {
+        console.log(n,next);
 		api.swarmlicant_init(size, name + n, function(err, droplet) {
 			next(err, droplet);
 		});
