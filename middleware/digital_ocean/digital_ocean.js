@@ -28,16 +28,6 @@ api.setup = function(provider_info, callback) {
 	api.size_def(callback);
 };
 
-swarmlicator.swarmlicant_id = function(id, callback) {
-	var test_api_for_ip = function(id, callback) {
-		brinydeep.show_droplets(id,function (e,r) {
-			console.log(r);
-			setTimeout(test_api_for_ip, 1000, address, callback);
-		})
-	}
-	setTimeout(test_api_for_ip, 1000, address, callback);
-};
-
 api.swarmlicant_init = function(size, name, callback) {
 	var swarmite_info = {};
 	swarmite_info.name = name;
@@ -46,12 +36,18 @@ api.swarmlicant_init = function(size, name, callback) {
 	swarmite_info.region_id = region_id;
 
 	brinydeep.new_droplets(swarmite_info, function(e, o) {
-		if (o) {
-			var id = o.droplet.id;
+        var ids_created_this_session = [];
+		if (Array.isArray(o)){
+			for (var droplet in o) {
+				var id = o[droplet].droplet.id;
+				//console.log(id);
+				ids_created_this_session.push(id);
+			}
 		} else {
-			callback('Droplets not created' + e);
+			var id = o.droplet.id;
+			ids_created_this_session.push(id); 
 		}
-
+        callback(e,ids_created_this_session);
 	});
 };
 
