@@ -8,11 +8,11 @@ var api = {};
 var sizes = [];
 //retrieves the latest sizes
 api.size_def = function(callback) {
-	sizes = brinydeep.sizes(function(e, o) {
+	brinydeep.sizes(function(e, o) {
 		if (e) {
-			//console.log(e);
 			throw Error(e);
 		} else {
+			//console.log(e,o);
 			sizes = o.sizes;
 			api.sizes = sizes; // exposing only for testing
 			callback();
@@ -20,35 +20,29 @@ api.size_def = function(callback) {
 	});
 }
 
+api.get_ips = function (ids,callback) {
+	brinydeep.get_ips(ids,callback);
+}
+
 api.setup = function(provider_info, callback) {
 	brinydeep.setup(provider_info.api_info.client_key,
 	provider_info.api_info.api_key);
-	region_id = provider_info.region_id;
-	image_id = provider_info.image_id;
+	region_id = parseInt(provider_info.region_id);
+	image_id = parseInt(provider_info.vm_image_id);
 	api.size_def(callback);
 };
 
 api.swarmlicant_init = function(size, name, callback) {
 	var swarmite_info = {};
 	swarmite_info.name = name;
-	swarmite_info.size = sizes[size];
+	swarmite_info.size_id = sizes[size].id;
 	swarmite_info.image_id = image_id;
 	swarmite_info.region_id = region_id;
-
+	//console.log(swarmite_info);
 	brinydeep.new_droplets(swarmite_info, function(e, o) {
-        var ids_created_this_session = [];
-		if (Array.isArray(o)){
-			for (var droplet in o) {
-				var id = o[droplet].droplet.id;
-				//console.log(id);
-				ids_created_this_session.push(id);
-			}
-		} else {
-			var id = o.droplet.id;
-			ids_created_this_session.push(id); 
-		}
-        callback(e,ids_created_this_session);
-	});
+		//console.log(e,o);
+		callback(e,o);
+ });
 };
 
 api.swarmlicant_scale = function(id, size, callback) {
@@ -69,8 +63,8 @@ api.swarmlicant_reset = function(id, callback) {
 	});
 };
 
-//api.destroy_swarm = function(ids, callback) {
-
-//};
+api.swarm_destroy = function(ids, callback) {
+	brinydeep.destroy(ids,callback);
+};
 
 module.exports = api;

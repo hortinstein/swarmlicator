@@ -12,7 +12,7 @@ var check_req_attr = function(config, req_attr) {
 	if (absent_attr.length !== 0) {
 		throw Error("missing following attributes from config:" + absent_attr);
 	} else {
-	
+
 	};
 };
 
@@ -57,7 +57,7 @@ swarmlicator.swarm_init = function(config, callback) {
 
 // too dangerous right now
 swarmlicator.swarm_destory = function(ids, callback) {
-	//   api.destroy_swarm(ids,callback);
+	api.swarm_destory(ids,callback);
 };
 
 
@@ -74,18 +74,25 @@ swarmlicator.curator_init = function(config, callback) {
 swarmlicator.troves_add = function(number, size, name, callback) {
 	var async = require('async');
 	async.times(number, function(n, next) {
-        console.log(n,next);
+		//console.log(n, next);
 		api.swarmlicant_init(size, name + n, function(err, droplet) {
 			next(err, droplet);
 		});
 	}, function(e, swarm) {
-		console.log(swarm);
+		//console.log(swarm);
+		//callback(e,swarm);
+		var ids = [];
+		swarm.forEach(function(machine) {
+			ids.push(machine.droplet.id);
+		});
+		//console.log(ids);
+		api.get_ips(ids,callback);
 		//should return the array of troves ips/ids
 	});
 };
 
 swarmlicator.troves_remove = function(trove_ids, callback) {
-    //need to inform the curator when a trove is being destroyed, than await for acknoledgement before proceeding.  
+	//need to inform the curator when a trove is being destroyed, than await for acknoledgement before proceeding.  
 };
 
 swarmlicator.swarmlicant_scale = function(trove_ids, swarmlicant_size, callback) {
