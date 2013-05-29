@@ -12,7 +12,6 @@ api.size_def = function(callback) {
 		if (e) {
 			throw Error(e);
 		} else {
-			//console.log(e,o);
 			sizes = o.sizes;
 			api.sizes = sizes; // exposing only for testing
 			callback();
@@ -38,23 +37,18 @@ api.swarmlicant_init = function(size, name, callback) {
 	swarmite_info.size_id = sizes[size].id;
 	swarmite_info.image_id = image_id;
 	swarmite_info.region_id = region_id;
-	//console.log(swarmite_info);
 	brinydeep.new_droplets(swarmite_info, function(e, o) {
-		//console.log(e,o);
 		callback(e,o);
  });
 };
 
 api.swarmlicant_scale = function(id, size, callback) {
-	brinydeep.resize(id, sizes[size], function(e, o) {
-		//callback();
-	});
+	size_id = sizes[size].id;
+	brinydeep.resize(id, size_id, callback);
 };
 
 api.swarmlicant_reset = function(id, callback) {
-	brinydeep.reboot(id, function(e, o) {
-		//callback();
-	});
+	brinydeep.reboot(id, callback);
 };
 
 api.swarmlicant_destroy = function(ids, callback) {
