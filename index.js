@@ -20,7 +20,8 @@ var swarmlicator = {};
 
 swarmlicator.setup = function(config, callback) {
 	var req_attr = ["provider_info", "name", "user", "application_servers",
-		"storage_backend", "init_cookie", "username", "passcookie", "schematic"]
+			"storage_backend", "init_cookie", "username", "passcookie", "schematic"
+	]
 	check_req_attr(config, req_attr);
 	config_json = config;
 	switch (config_json.provider_info.provider_id) {
@@ -49,25 +50,25 @@ swarmlicator.swarmlicant_ping = function(address, callback) {
 };
 
 swarmlicator.swarm_init = function(config, callback) {
-
 	//needs to be called after all nodes are added
 	//swarmlicator.curator_init(config);
 }
 
-
-// too dangerous right now
-swarmlicator.swarm_destory = function(ids, callback) {
-	api.swarm_destory(ids,callback);
+swarmlicator.swarmlicant_destroy = function(ids, callback) {
+	api.swarmlicant_destroy(ids, callback);
 };
 
 
 //these bind the primary functions to their API.  This is not 100% nessecary, but done for visibility and in case of future expansion.
 //general error checking should be moved here eventually
-swarmlicator.curator_init = function(config, callback) {
-	var req_attr = ["type", "name", "user", "application_servers", "init", "port",
-		"storage_backend", "init_cookie", "username", "passcookie", "troves"]
-	check_req_attr(config, req_attr); //sync fucntion that will throw an error if missing attr
-
+swarmlicator.curator_init = function(size, name, callback) {
+	api.swarmlicant_init(size, name + "-curator", function(e, o) {
+		if (e) {
+			callback(e, o);
+		} else {
+			api.get_ips(o.droplet.id, callback);
+		}
+	});
 
 };
 
@@ -79,20 +80,19 @@ swarmlicator.troves_add = function(number, size, name, callback) {
 			next(err, droplet);
 		});
 	}, function(e, swarm) {
-		//console.log(swarm);
-		//callback(e,swarm);
-		var ids = [];
-		swarm.forEach(function(machine) {
-			ids.push(machine.droplet.id);
-		});
-		//console.log(ids);
-		api.get_ips(ids,callback);
-		//should return the array of troves ips/ids
+		if (e) {
+			callback(e, o);
+		} else {
+			console.log(e, swarm);
+			var ids = [];
+			swarm.forEach(function(machine) {
+				ids.push(machine.droplet.id);
+			});
+			//console.log(ids);
+			api.get_ips(ids, callback);
+			//should return the array of troves ips/ids
+		}
 	});
-};
-
-swarmlicator.troves_remove = function(trove_ids, callback) {
-	//need to inform the curator when a trove is being destroyed, than await for acknoledgement before proceeding.  
 };
 
 swarmlicator.swarmlicant_scale = function(trove_ids, swarmlicant_size, callback) {

@@ -63,7 +63,7 @@ api.swarmlicant_reset = function(id, callback) {
 	});
 };
 
-api.swarm_destroy = function(ids, callback) {
+api.swarmlicant_destroy = function(ids, callback) {
 	brinydeep.destroy(ids,callback);
 };
 
