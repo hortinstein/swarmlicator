@@ -47,19 +47,13 @@ api.swarmlicant_init = function(size, name, callback) {
 
 api.swarmlicant_scale = function(id, size, callback) {
 	brinydeep.resize(id, sizes[size], function(e, o) {
-		callback();
-	});
-};
-
-api.swarmlicant_destroy = function(id, callback) {
-	brinydeep.destroy(id, function(e, o) {
-		callback();
+		//callback();
 	});
 };
 
 api.swarmlicant_reset = function(id, callback) {
 	brinydeep.reboot(id, function(e, o) {
-		callback();
+		//callback();
 	});
 };
 
