@@ -72,7 +72,7 @@ swarmlicator.curator_init = function(size, name, callback) {
 
 };
 
-swarmlicator.troves_add = function(number, size, name, callback) {
+swarmlicator.troves_init = function(number, size, name, callback) {
 	var async = require('async');
 	async.times(number, function(n, next) {
 		//console.log(n, next);
