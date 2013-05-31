@@ -2,3 +2,4 @@ node_modules/
 .c9revisions
 .config
 config.json
+test/test_blueprint_out.json

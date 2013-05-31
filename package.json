@@ -4,7 +4,7 @@
   "description": "tool for creating a swarm based on json blueprint created by swarmgineer",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/test.js -t 4000"
+    "test": "mocha -b test/test.js -t 4000 "
   },
   "repository": {
     "type": "git",

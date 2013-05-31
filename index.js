@@ -1,9 +1,6 @@
 //modular for future expansion to other APIs
 var api = "";
 
-//
-var config_json = "";
-
 var _und = require("underscore");
 //this function takes a list of required attributes and ensures they are present
 var check_req_attr = function(config, req_attr) {
@@ -19,17 +16,14 @@ var check_req_attr = function(config, req_attr) {
 var swarmlicator = {};
 
 swarmlicator.setup = function(config, callback) {
-	var req_attr = ["provider_info", "name", "user", "application_servers",
-			"storage_backend", "init_cookie", "username", "passcookie", "schematic"
-	]
+	var req_attr = ["provider_info"];
 	check_req_attr(config, req_attr);
-	config_json = config;
-	switch (config_json.provider_info.provider_id) {
+	switch (config.provider_info.provider_id) {
 		case "digital_ocean":
 			api = require('./middleware/digital_ocean/digital_ocean.js');
 			break;
 	};
-	api.setup(config_json.provider_info, callback);
+	api.setup(config.provider_info, callback);
 };
 
 swarmlicator.swarmlicant_ping = function(address, callback) {
@@ -49,45 +43,65 @@ swarmlicator.swarmlicant_ping = function(address, callback) {
 	setTimeout(test_alive, 1000, address, callback);
 };
 
-swarmlicator.swarm_init = function(config, callback) {
-	//needs to be called after all nodes are added
-	//swarmlicator.curator_init(config);
+swarmlicator.swarm_init = function(config, m_callback) {
+	var req_attr = ["provider_info", "name", "user", "application_servers",
+			"storage_backend", "init_cookie", "username", "passcookie", "schematic"
+	]
+	check_req_attr(config, req_attr);
+	// if (config.init !== "true" && config.init !== true) { //hacky...too lazy and slightly drunk to check if json intrepreter parses right
+	// 	throw Error('Configuration blueprint is not for initial');
+	// }
+
+	var req_attr = ["curator_size", "trove_size", "troves"];
+	check_req_attr(config.schematic, req_attr);
+
+	var name = config.name;
+	var curator_size = config.schematic.curator_size;
+	var trove_size = config.schematic.trove_size;
+	var trove_number = config.schematic.troves;
+
+	var async = require("async");
+	async.parallel({
+		//curator init
+		curator: function(callback) {
+			swarmlicator.swarmlicant_init(1, curator_size, name + "-curator", callback)
+		},
+		//trove init
+		troves: function(callback) {
+			swarmlicator.swarmlicant_init(trove_number, trove_size, name + "-trove", callback)
+		}
+	},
+
+	function(err, results) {
+		m_callback(err, results);
+	});
 }
 
 swarmlicator.swarmlicant_destroy = function(ids, callback) {
 	api.swarmlicant_destroy(ids, callback);
 };
 
-
-//these bind the primary functions to their API.  This is not 100% nessecary, but done for visibility and in case of future expansion.
-//general error checking should be moved here eventually
-swarmlicator.curator_init = function(size, name, callback) {
-	api.swarmlicant_init(size, name + "-curator", function(e, o) {
-		if (e) {
-			callback(e, o);
-		} else {
-			api.get_ips(o.droplet.id, callback);
-		}
-	});
-
-};
-
-swarmlicator.troves_init = function(number, size, name, callback) {
+swarmlicator.swarmlicant_init = function(number, size, name, callback) {
 	var async = require('async');
 	async.times(number, function(n, next) {
 		//console.log(n, next);
-		api.swarmlicant_init(size, name + n, function(err, droplet) {
+		api.swarmlicant_init(size, name, function(err, droplet) {
 			next(err, droplet);
 		});
 	}, function(e, swarm) {
 		if (e) {
-			callback(e, o);
+			callback(e, swarm);
 		} else {
-			console.log(e, swarm);
+			//console.log(e, swarm);
 			var ids = [];
-			swarm.forEach(function(machine) {
-				ids.push(machine.droplet.id);
-			});
+			if (swarm.length === 1) { //looks cleaner with this slight hack
+				ids = swarm[0].droplet.id;
+
+			} else {
+				swarm.forEach(function(machine) {
+					ids.push(machine.droplet.id);
+				});
+			}
 			//console.log(ids);
 			api.get_ips(ids, callback);
 			//should return the array of troves ips/ids
