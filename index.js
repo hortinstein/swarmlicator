@@ -26,6 +26,12 @@ swarmlicator.setup = function(config, callback) {
 	api.setup(config.provider_info, callback);
 };
 
+
+swarmlicator.setOutput = function(file_location, callback) {
+	
+};
+
+
 swarmlicator.swarmlicant_ping = function(address, callback) {
 	var test_alive = function(address, callback) {
 		var request = require("request");
@@ -73,7 +79,9 @@ swarmlicator.swarm_init = function(config, m_callback) {
 	},
 
 	function(err, results) {
-		m_callback(err, results);
+		delete config.schematic;
+		config.schematic = results;
+		m_callback(err, config);
 	});
 }
 
