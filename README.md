@@ -4,6 +4,7 @@ takes input from swarmgineer
 
 
 TODO
+* include size info in outputted schematic
 * Seperate out API tests from primary bulk
 * Use an actual test swarmlicant
 * figure out a better way to manage configs
@@ -11,4 +12,3 @@ TODO
 
 NOTES
 * Sizes start from zero, need to add a feature that takes names instead
-* Does a trove need to know its own ID?
